@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="hk" language="groovy" pageWidth="419" pageHeight="297" whenNoDataType="AllSectionsNoDetail" columnWidth="379" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d8672ef9-6a19-4428-8ba0-001f8898ab64">
+	<property name="ireport.zoom" value="1.3310000000000004"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select Name,item,qty from Core1_lm_hk_request]]>
+	</queryString>
+	<field name="Name" class="java.lang.String"/>
+	<field name="item" class="java.lang.String"/>
+	<field name="qty" class="java.lang.String"/>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="161" splitType="Stretch">
+			<line>
+				<reportElement x="181" y="11" width="1" height="21" uuid="07fa6283-603c-4188-bc8f-d6e923f770a8"/>
+			</line>
+			<line>
+				<reportElement x="367" y="11" width="1" height="21" uuid="5b4bceee-8b83-43a5-a4bc-1feab6a4fb79"/>
+			</line>
+			<line>
+				<reportElement x="11" y="31" width="356" height="1" uuid="ca0f3e4c-e17c-4e06-8072-7542887b283a"/>
+			</line>
+			<line>
+				<reportElement x="10" y="10" width="1" height="22" uuid="b06f750d-12b4-48da-9423-eeba265fac4c"/>
+			</line>
+			<line>
+				<reportElement x="11" y="10" width="356" height="1" uuid="52fd5f69-29fe-4548-b5a6-cc54ddf081a7"/>
+			</line>
+			<textField>
+				<reportElement x="53" y="11" width="100" height="20" uuid="3e766c41-98cf-4bec-8b3b-2d24ac0c89eb"/>
+				<textFieldExpression><![CDATA[$F{item}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="226" y="12" width="100" height="20" uuid="ef008eb5-abe7-478f-b60e-4434b2a715b6"/>
+				<textFieldExpression><![CDATA[$F{qty}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

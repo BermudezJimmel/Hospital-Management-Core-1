@@ -1,0 +1,71 @@
+        new Thread() {
+            @Override
+            public void run() {
+                while (ddd == ddd) {
+
+                    try {
+			// 1st String for Counting current table data
+                        String sql = "select count(No) as Total FROM [HMSdb].[dbo].[LogList]";
+
+                        conn = databaseconn.ConnecrDb();
+                        pst = conn.prepareStatement(sql);
+                        rs = pst.executeQuery();
+
+                        if (rs.next()) {
+                            String total = rs.getString("Total");
+                            int t = Integer.parseInt(total);
+			
+			//Every 5 seconds executing query
+                            Thread.sleep(5000);
+
+                            try {
+				// 2nd String for Counting current table data
+                                String sql1 = "select count(No) as Total FROM [HMSdb].[dbo].[LogList]";
+
+                                conn = databaseconn.ConnecrDb();
+                                pst = conn.prepareStatement(sql1);
+                                rs = pst.executeQuery();
+
+                                if (rs.next()) {
+                                    String total1 = rs.getString("Total");
+                                    System.out.println();
+                                    int t1 = Integer.parseInt(total1);
+
+                                    try {
+					// 3nd String for Selecting Specific data to monitor
+                                        String sql2 = "select SYS_USER, ACTIVITY FROM [HMSdb].[dbo].[LogList] where No = '" + total1 + "'";
+                                        conn = databaseconn.ConnecrDb();
+                                        pst = conn.prepareStatement(sql2);
+                                        rs = pst.executeQuery();
+
+                                        if (rs.next()) {
+
+                                            String user = rs.getString("SYS_USER");
+                                            String activity = rs.getString("ACTIVITY");
+
+					// if Condition String 1 and String 2 Comparing for Checking update on the table 
+                                            if (t1 > t) {
+						// Solution
+                                                int deff = t1 - t;
+
+                                                DesktopNotify.showDesktopMessage("System Notification", user + " " + activity,
+                                                        DesktopNotify.SUCCESS, 8000);
+                                            } else {
+                                            }
+                                        }
+                                    } catch (Exception e) {
+
+                                    }
+                                }
+                            } catch (Exception ex) {
+                                System.out.println(ex + "Error banda don sa query pre... si jimmel kasi e");
+                            }
+
+                        }
+
+                    } catch (Exception e) {
+
+                    }
+                }
+            }
+        }.start();

@@ -1,0 +1,13 @@
+    public void audio() {
+        InputStream in;
+        try {
+
+            in = new FileInputStream(new File("C:\\Users\\jerome\\Documents\\NetBeansProjects\\HR1System\\src\\VoiceOver\\SystemUserLogIn.wav"));
+            AudioStream audios = new AudioStream(in);
+            AudioPlayer.player.start(audios);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+
+    }

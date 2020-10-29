@@ -1,0 +1,87 @@
+ public void FileNavigate(){
+        
+                    FileRoot.removeAll();
+                    FileRoot.revalidate();
+                    FileRoot.repaint();
+                    
+                 try{  
+            String sql="Select COUNT(*) as ave from HR2_Exams";
+            
+            conn =  databaseconn.ConnecrDb();
+            pst =  conn.prepareStatement(sql);
+            rs = pst.executeQuery();
+            
+            
+           if(rs.next()){  
+               
+           average.setText(rs.getString("ave")); 
+           
+           int count = Integer.parseInt(average.getText());
+           
+           
+           for(add = 0; add <= count; add++) {
+               
+                PFV = new Panel_FileNavigator();
+                do{
+                    try{
+                        
+                    String a = Integer.toString(add);
+                    
+                    String sql2 ="  Select * from NewExam where RowNumber = '"+a+"' AND Folder_ID = '"+FolderID.getText()+"'";
+            
+                    conn =  databaseconn.ConnecrDb();
+                    pst =  conn.prepareStatement(sql2);
+                    rs = pst.executeQuery();
+                    
+                    if(rs.next()){
+                    
+                    PFV.Filename.setText(rs.getString("ExamName"));
+                   
+                    FileRoot.add(PFV);
+                    FileRoot.revalidate();
+                    FileRoot.repaint();
+                    
+                  
+                    
+                  
+                    }
+                    }
+                    catch(Exception e){
+                        System.out.print(e);
+                    }
+                }while(add > count);
+                
+
+            }
+             }
+          } catch(Exception e){
+              System.out.println(e);
+          }
+                 
+                 
+            try {   
+       
+             String cnt = "Select COUNT(*) as ave from HR2_Exams where Folder_ID = '"+FolderID.getText()+"' ";  
+             pst=conn.prepareStatement(cnt);                    
+             rs=pst.executeQuery();
+             if(rs.next()){
+            
+                       jLabel7.setText(rs.getString("ave"));
+           
+            }
+     
+            
+                       }catch(Exception e){
+                       System.out.println(e.getMessage());
+               }
+            
+                  
+            int cc = Integer.parseInt(jLabel7.getText());
+            
+            ttl = cc * 35 + 40 ;
+            
+              this.setSize(this.getWidth(),ttl);
+              this.setPreferredSize(new Dimension (this.getWidth(),ttl));
+            
+        
+    }

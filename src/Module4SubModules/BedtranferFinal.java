@@ -1,0 +1,935 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Module4SubModules;
+
+import SystemInstance.MysqlConnect;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import javax.swing.JOptionPane;
+import net.proteanit.sql.DbUtils;
+
+public class BedtranferFinal extends javax.swing.JFrame
+{
+
+    Connection con = null;
+    Statement stmt = null;
+    ResultSet rs = null;
+    java.sql.PreparedStatement pst = null;
+    CallableStatement cst = null;
+
+    public BedtranferFinal()
+    {
+        initComponents();
+        con = MysqlConnect.ConnectDB();
+        Update_transfer_tbl();
+        CurrentDate();
+        // currentday();
+    }
+
+    private void Update_transfer_tbl()
+    {
+
+        try
+        {
+            String sql = "select Room_ID,Bed_No,Room_type,rate,bed_status from  Core1_bm_rooms\n"
+                    + "where bed_status='Available'";
+            stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            rs = stmt.executeQuery(sql);
+            tblTransfer.setModel(DbUtils.resultSetToTableModel(rs));
+
+        } catch (Exception e)
+        {
+            System.out.println(e);
+        }
+
+    }
+
+    // Current date on Bedtransfer
+    public void CurrentDate()
+    {
+        Calendar cal = new GregorianCalendar();
+        int month1 = cal.get(Calendar.MONTH);
+        int year = cal.get(Calendar.YEAR);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        int min = cal.get(Calendar.MINUTE);
+
+        int hour = cal.get(Calendar.HOUR);
+        int AM_PM = cal.get(Calendar.AM_PM);
+
+        int month = month1 + 1;
+
+        String day_night = "";
+
+        if (AM_PM == 1)
+        {
+            day_night = "PM";
+        } else
+        {
+            day_night = "AM";
+        }
+        String weekday = "";
+        if (hour == 0)
+        {
+            hour = 12;
+        }
+
+        String mn = null;
+        switch (min)
+        {
+            case 0:
+                mn = "0" + min;
+                break;
+            case 1:
+                mn = "0" + min;
+                break;
+            case 2:
+                mn = "0" + min;
+                break;
+            case 3:
+                mn = "0" + min;
+                break;
+            case 4:
+                mn = "0" + min;
+                break;
+            case 5:
+                mn = "0" + min;
+                break;
+            case 6:
+                mn = "0" + min;
+                break;
+            case 7:
+                mn = "0" + min;
+                break;
+            case 8:
+                mn = "0" + min;
+                break;
+            case 9:
+                mn = "0" + min;
+                break;
+            default:
+                mn = "" + min;
+                break;
+        }
+
+        String day1;
+        if (day == 1)
+        {
+            day1 = "0" + day;
+        } else if (day == 1)
+        {
+            day1 = "0" + day;
+        } else if (day == 2)
+        {
+            day1 = "0" + day;
+        } else if (day == 3)
+        {
+            day1 = "0" + day;
+        } else if (day == 4)
+        {
+            day1 = "0" + day;
+        } else if (day == 5)
+        {
+            day1 = "0" + day;
+        } else if (day == 6)
+        {
+            day1 = "0" + day;
+        } else if (day == 7)
+        {
+            day1 = "0" + day;
+        } else if (day == 8)
+        {
+            day1 = "0" + day;
+        } else if (day == 9)
+        {
+            day1 = "0" + day;
+        } else
+        {
+            day1 = "" + day;
+        }
+
+        String buwan;
+        if (month == 1)
+        {
+            buwan = "0" + month;
+        } else if (month1 == 1)
+        {
+            buwan = "0" + month;
+        } else if (month1 == 2)
+        {
+            buwan = "0" + month;
+        } else if (month1 == 3)
+        {
+            buwan = "0" + month;
+        } else if (month1 == 4)
+        {
+            buwan = "0" + month;
+        } else if (month1 == 5)
+        {
+            buwan = "0" + month;
+        } else if (month1 == 6)
+        {
+            buwan = "0" + month;
+        } else if (month1 == 7)
+        {
+            buwan = "0" + month;
+        } else if (month1 == 8)
+        {
+            buwan = "0" + month;
+        } else
+        {
+            buwan = "" + month;
+        }
+
+        //txt_date.setText(+hour+":"+minute+" "+day_night+", "+month+"/"+(day)+"/"+year);
+        date_lbl2.setText((buwan) + "/" + (day1) + "/" + year + " " + hour + ":" + mn + day_night);
+
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jPanel1 = new javax.swing.JPanel();
+        PatientPanel = new javax.swing.JPanel();
+        Name = new javax.swing.JLabel();
+        Admission = new javax.swing.JLabel();
+        lbl_name2 = new javax.swing.JLabel();
+        lbl_admitid2 = new javax.swing.JLabel();
+        Admission1 = new javax.swing.JLabel();
+        lbl_pr_id2 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel20 = new javax.swing.JLabel();
+        Rate = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        txt_rate2 = new javax.swing.JTextField();
+        label1 = new java.awt.Label();
+        label2 = new java.awt.Label();
+        jLabel24 = new javax.swing.JLabel();
+        combo_bedno1 = new javax.swing.JComboBox<>();
+        jLabel13 = new javax.swing.JLabel();
+        jcombo_type1 = new javax.swing.JComboBox<>();
+        Rate1 = new javax.swing.JLabel();
+        txt_rate1 = new javax.swing.JTextField();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel22 = new javax.swing.JLabel();
+        room_type = new javax.swing.JTextField();
+        txt_bedno2 = new javax.swing.JTextField();
+        jLabel25 = new javax.swing.JLabel();
+        combo_roomno2 = new javax.swing.JComboBox<>();
+        txt_roomno2 = new javax.swing.JTextField();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        Rate2 = new javax.swing.JLabel();
+        date_lbl3 = new java.awt.Label();
+        date_lbl2 = new java.awt.Label();
+        jExit = new javax.swing.JButton();
+        jExit1 = new javax.swing.JButton();
+        BedTransfer = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblTransfer = new javax.swing.JTable();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setPreferredSize(new java.awt.Dimension(802, 553));
+
+        PatientPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Patient Details", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14))); // NOI18N
+
+        Name.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        Name.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Name.setText("Name:");
+
+        Admission.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        Admission.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Admission.setText("Admission ID:");
+
+        lbl_name2.setText("-");
+
+        lbl_admitid2.setText("-");
+
+        Admission1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        Admission1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Admission1.setText("Patient ID:");
+
+        lbl_pr_id2.setText("-");
+
+        javax.swing.GroupLayout PatientPanelLayout = new javax.swing.GroupLayout(PatientPanel);
+        PatientPanel.setLayout(PatientPanelLayout);
+        PatientPanelLayout.setHorizontalGroup(
+            PatientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PatientPanelLayout.createSequentialGroup()
+                .addGap(57, 57, 57)
+                .addComponent(Name)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbl_name2, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 315, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PatientPanelLayout.createSequentialGroup()
+                .addContainerGap(37, Short.MAX_VALUE)
+                .addComponent(Admission1)
+                .addGap(6, 6, 6)
+                .addComponent(lbl_pr_id2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
+                .addComponent(Admission)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbl_admitid2, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(111, 111, 111))
+        );
+        PatientPanelLayout.setVerticalGroup(
+            PatientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PatientPanelLayout.createSequentialGroup()
+                .addGap(13, 13, 13)
+                .addGroup(PatientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lbl_admitid2)
+                    .addComponent(Admission)
+                    .addGroup(PatientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(Admission1)
+                        .addGroup(PatientPanelLayout.createSequentialGroup()
+                            .addGap(1, 1, 1)
+                            .addComponent(lbl_pr_id2))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(PatientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(PatientPanelLayout.createSequentialGroup()
+                        .addComponent(lbl_name2)
+                        .addGap(31, 31, 31))
+                    .addGroup(PatientPanelLayout.createSequentialGroup()
+                        .addComponent(Name)
+                        .addGap(32, 32, 32))))
+        );
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Transfer Details", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14))); // NOI18N
+
+        jLabel20.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel20.setText("Bed no:");
+
+        Rate.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        Rate.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Rate.setText("Rate:");
+
+        jLabel21.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel21.setText("Reason to transfer:");
+
+        jLabel12.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel12.setText("Room type:");
+
+        jLabel19.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel19.setText("per day");
+
+        txt_rate2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txt_rate2.setPreferredSize(new java.awt.Dimension(200, 25));
+
+        label1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        label1.setText("From");
+
+        label2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        label2.setText("To");
+
+        jLabel24.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel24.setText("Bed no:");
+
+        combo_bedno1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                combo_bedno1FocusLost(evt);
+            }
+        });
+        combo_bedno1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                combo_bedno1ActionPerformed(evt);
+            }
+        });
+
+        jLabel13.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel13.setText("Room type:");
+
+        jcombo_type1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jcombo_type1FocusLost(evt);
+            }
+        });
+        jcombo_type1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcombo_type1ActionPerformed(evt);
+            }
+        });
+
+        Rate1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        Rate1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Rate1.setText("Rate:");
+
+        txt_rate1.setPreferredSize(new java.awt.Dimension(200, 25));
+
+        jLabel22.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel22.setText("per day");
+
+        room_type.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        room_type.setPreferredSize(new java.awt.Dimension(200, 25));
+
+        txt_bedno2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txt_bedno2.setPreferredSize(new java.awt.Dimension(200, 25));
+
+        jLabel25.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel25.setText("Room no:");
+
+        combo_roomno2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                combo_roomno2FocusLost(evt);
+            }
+        });
+        combo_roomno2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                combo_roomno2ActionPerformed(evt);
+            }
+        });
+
+        txt_roomno2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txt_roomno2.setPreferredSize(new java.awt.Dimension(200, 25));
+
+        jLabel23.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel23.setText("Room no:");
+
+        jLabel5.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("Date Time of transfer:");
+
+        Rate2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        Rate2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Rate2.setText("Date");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(62, 62, 62)
+                        .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(247, 247, 247)
+                        .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel4Layout.createSequentialGroup()
+                                    .addGap(10, 10, 10)
+                                    .addComponent(jLabel23))
+                                .addGroup(jPanel4Layout.createSequentialGroup()
+                                    .addGap(21, 21, 21)
+                                    .addComponent(jLabel20))
+                                .addComponent(jLabel12)
+                                .addGroup(jPanel4Layout.createSequentialGroup()
+                                    .addGap(34, 34, 34)
+                                    .addComponent(Rate)))
+                            .addComponent(Rate2))
+                        .addGap(4, 4, 4)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(date_lbl3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addGap(136, 136, 136)
+                                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                                .addGap(7, 7, 7)
+                                                .addComponent(jLabel25)
+                                                .addGap(7, 7, 7)
+                                                .addComponent(combo_roomno2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(4, 4, 4)
+                                                .addComponent(jLabel24)
+                                                .addGap(10, 10, 10)
+                                                .addComponent(combo_bedno1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                                .addComponent(jLabel21)
+                                                .addGap(4, 4, 4)
+                                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                                .addGap(146, 146, 146)
+                                                .addComponent(Rate1)
+                                                .addGap(10, 10, 10)
+                                                .addComponent(txt_rate1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(4, 4, 4)
+                                                .addComponent(jLabel22))))
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addGap(118, 118, 118)
+                                        .addComponent(jLabel5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(date_lbl2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txt_roomno2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txt_bedno2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(room_type, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(168, 168, 168)
+                                .addComponent(jLabel13)
+                                .addGap(7, 7, 7)
+                                .addComponent(jcombo_type1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(txt_rate2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel19)))))
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(16, 16, 16)
+                                .addComponent(jLabel23)
+                                .addGap(16, 16, 16)
+                                .addComponent(jLabel20)
+                                .addGap(16, 16, 16)
+                                .addComponent(jLabel12)
+                                .addGap(16, 16, 16)
+                                .addComponent(Rate))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(txt_roomno2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(6, 6, 6)
+                                .addComponent(txt_bedno2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(6, 6, 6)
+                                .addComponent(room_type, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(6, 6, 6)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txt_rate2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel19))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(Rate2)
+                            .addComponent(date_lbl3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(combo_roomno2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(combo_bedno1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(3, 3, 3)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel25)
+                                    .addComponent(jLabel24))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel13)
+                            .addComponent(jcombo_type1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_rate1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(4, 4, 4)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Rate1)
+                                    .addComponent(jLabel22))))
+                        .addGap(6, 6, 6)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel21))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(date_lbl2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(9, Short.MAX_VALUE))
+        );
+
+        jExit.setText("Exit");
+        jExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jExitActionPerformed(evt);
+            }
+        });
+
+        jExit1.setText("Save Transfer");
+        jExit1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jExit1ActionPerformed(evt);
+            }
+        });
+
+        jScrollPane3.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane3.setBorder(null);
+
+        tblTransfer.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        tblTransfer.setForeground(new java.awt.Color(51, 51, 51));
+        tblTransfer.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tblTransfer.setGridColor(new java.awt.Color(255, 255, 255));
+        tblTransfer.setRowHeight(20);
+        tblTransfer.setSelectionBackground(new java.awt.Color(0, 171, 82));
+        tblTransfer.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblTransferMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                tblTransferMouseEntered(evt);
+            }
+        });
+        jScrollPane3.setViewportView(tblTransfer);
+
+        javax.swing.GroupLayout BedTransferLayout = new javax.swing.GroupLayout(BedTransfer);
+        BedTransfer.setLayout(BedTransferLayout);
+        BedTransferLayout.setHorizontalGroup(
+            BedTransferLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 740, Short.MAX_VALUE)
+            .addGroup(BedTransferLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 740, Short.MAX_VALUE))
+        );
+        BedTransferLayout.setVerticalGroup(
+            BedTransferLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 137, Short.MAX_VALUE)
+            .addGroup(BedTransferLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE))
+        );
+
+        jPanel6.setBackground(new java.awt.Color(0, 124, 134));
+        jPanel6.setPreferredSize(new java.awt.Dimension(300, 40));
+        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel2.setText("Transfer request");
+        jPanel6.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(602, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jExit1)
+                        .addGap(36, 36, 36))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jExit)
+                        .addGap(61, 61, 61))))
+            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(10, 10, 10)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(PatientPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addContainerGap(24, Short.MAX_VALUE)))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addComponent(BedTransfer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 20, Short.MAX_VALUE)))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addComponent(jExit, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jExit1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 274, Short.MAX_VALUE)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(140, 140, 140))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(8, 8, 8)
+                    .addComponent(PatientPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(7, 7, 7)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(191, Short.MAX_VALUE)))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addGap(0, 405, Short.MAX_VALUE)
+                    .addComponent(BedTransfer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 741, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 542, Short.MAX_VALUE)
+        );
+
+        setSize(new java.awt.Dimension(741, 542));
+        setLocationRelativeTo(null);
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void jcombo_type1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcombo_type1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcombo_type1ActionPerformed
+
+    private void jcombo_type1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jcombo_type1FocusLost
+        jcombo_type1.removeAllItems();
+    }//GEN-LAST:event_jcombo_type1FocusLost
+
+    private void combo_bedno1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_bedno1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_combo_bedno1ActionPerformed
+
+    private void combo_bedno1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_combo_bedno1FocusLost
+        combo_bedno1.removeAllItems();
+    }//GEN-LAST:event_combo_bedno1FocusLost
+
+    private void combo_roomno2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_combo_roomno2FocusLost
+
+        combo_roomno2.removeAllItems();
+    }//GEN-LAST:event_combo_roomno2FocusLost
+
+    private void combo_roomno2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_roomno2ActionPerformed
+
+    }//GEN-LAST:event_combo_roomno2ActionPerformed
+
+    private void jExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jExitActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jExitActionPerformed
+
+    private void jExit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jExit1ActionPerformed
+         try
+        {
+
+            String query = "insert into Core1_bm_roomshistory (Patient_ID,patient_name,from_room,from_bed,from_type,from_dateOccu,Room_ID,Bed_No,Room_type,date_done,reason_transfer,status)"
+                    + "values(?,?,?,?,?,?,?,?,?,?,?,?)";
+            //         String query = "insert into Core1_bm_transferHistory (Patient_ID,patient_name,from_room,from_bed,from_type,to_room,to_bed,to_type,)values(?,?,?,?,?,?,?,?)";
+
+            pst = con.prepareStatement(query);
+
+            pst.setString(1, lbl_pr_id2.getText());
+            pst.setString(2, lbl_name2.getText());
+            pst.setString(3, txt_roomno2.getText());
+            pst.setString(4, txt_bedno2.getText());
+            pst.setString(5, room_type.getText());
+            pst.setString(6, date_lbl3.getText());
+            pst.setString(7, combo_roomno2.getSelectedItem().toString());
+            pst.setString(8, combo_bedno1.getSelectedItem().toString());
+            pst.setString(9, jcombo_type1.getSelectedItem().toString());
+            pst.setString(10, date_lbl2.getText());
+            pst.setString(11, jTextField1.getText());
+            pst.setString(12, "Transfered successfully");
+            //    pst.setString(10, "Scheduled");
+
+            pst.execute();
+            try
+            {
+
+                String query2 = "update Core1_bm_rooms set bed_status = 'For Cleaning',Patient_ID='',bed_remarks='Transfer successfully' "
+                        + "where Patient_ID='" + lbl_pr_id2.getText() + "' ";
+
+                java.sql.Statement st = null;
+
+                st = con.createStatement();
+                st.executeUpdate(query2);
+
+            } catch (Exception err)
+            {
+                JOptionPane.showMessageDialog(null, err);
+            }
+            try
+            {
+
+                String query2 = "update Core1_bm_rooms set bed_status = 'Occupied',Patient_ID ='" + lbl_pr_id2.getText() + "' ,bed_remarks='Patient transfered',date_occopied='" + date_lbl2.getText() + "' where  Bed_No  = '" + combo_bedno1.getSelectedItem() + "'";
+
+                java.sql.Statement st = null;
+
+                st = con.createStatement();
+                st.executeUpdate(query2);
+
+            } catch (Exception err)
+            {
+                JOptionPane.showMessageDialog(null, err);
+            }
+
+        } catch (Exception err)
+        {
+            JOptionPane.showMessageDialog(null, err);
+        }
+        JOptionPane.showMessageDialog(null, "Patient transfered successfully");
+        Update_transfer_tbl();
+    }//GEN-LAST:event_jExit1ActionPerformed
+
+    private void tblTransferMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tblTransferMouseClicked
+    {//GEN-HEADEREND:event_tblTransferMouseClicked
+
+// Display data on textfield by clicking table
+        try
+        {
+            int row = tblTransfer.getSelectedRow();
+            String Table_transfer = (tblTransfer.getModel().getValueAt(row, 0).toString());
+            String sql = "select Room_ID as Room,Bed_No as Bed,Room_type as 'Type of room',rate as 'Rate per day',bed_status as 'Bed status' from  Core1_bm_rooms\n"
+                    + "where Room_ID='" + Table_transfer + "' ";
+
+            pst = con.prepareStatement(sql);
+            rs = pst.executeQuery();
+
+            if (rs.next())
+            {
+                //Display data for transfer  
+                String add1 = rs.getString("Room");
+                combo_roomno2.addItem(add1);
+                combo_roomno2.setSelectedItem(add1);
+
+                String add2 = rs.getString("Bed");
+                combo_bedno1.addItem(add2);
+                combo_bedno1.setSelectedItem(add2);
+
+                String add3 = rs.getString("Type of room");
+                jcombo_type1.addItem(add3);
+                jcombo_type1.setSelectedItem(add3);
+                String add4 = rs.getString("Rate per day");
+                txt_rate1.setText(add4);
+
+            }
+        } catch (Exception e)
+        {
+            System.out.println(e);
+        }
+        Update_transfer_tbl();
+    }//GEN-LAST:event_tblTransferMouseClicked
+
+    private void tblTransferMouseEntered(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tblTransferMouseEntered
+    {//GEN-HEADEREND:event_tblTransferMouseEntered
+
+       
+    }//GEN-LAST:event_tblTransferMouseEntered
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[])
+    {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try
+        {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
+            {
+                if ("Nimbus".equals(info.getName()))
+                {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex)
+        {
+            java.util.logging.Logger.getLogger(BedtranferFinal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex)
+        {
+            java.util.logging.Logger.getLogger(BedtranferFinal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex)
+        {
+            java.util.logging.Logger.getLogger(BedtranferFinal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex)
+        {
+            java.util.logging.Logger.getLogger(BedtranferFinal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable()
+        {
+            public void run()
+            {
+                new BedtranferFinal().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Admission;
+    private javax.swing.JLabel Admission1;
+    private javax.swing.JPanel BedTransfer;
+    private javax.swing.JLabel Name;
+    private javax.swing.JPanel PatientPanel;
+    private javax.swing.JLabel Rate;
+    private javax.swing.JLabel Rate1;
+    private javax.swing.JLabel Rate2;
+    private javax.swing.JComboBox<String> combo_bedno1;
+    private javax.swing.JComboBox<String> combo_roomno2;
+    public static java.awt.Label date_lbl2;
+    public static java.awt.Label date_lbl3;
+    private javax.swing.JButton jExit;
+    private javax.swing.JButton jExit1;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JComboBox<String> jcombo_type1;
+    private java.awt.Label label1;
+    private java.awt.Label label2;
+    public static javax.swing.JLabel lbl_admitid2;
+    public static javax.swing.JLabel lbl_name2;
+    public static javax.swing.JLabel lbl_pr_id2;
+    public static javax.swing.JTextField room_type;
+    private javax.swing.JTable tblTransfer;
+    public static javax.swing.JTextField txt_bedno2;
+    private javax.swing.JTextField txt_rate1;
+    public static javax.swing.JTextField txt_rate2;
+    public static javax.swing.JTextField txt_roomno2;
+    // End of variables declaration//GEN-END:variables
+}
